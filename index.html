@@ -324,7 +324,7 @@ function stepIntro(){
 // ─────────────────────────────────────────
 function stepVisa(){
   const checks = [
-    {id:'v1', name:'Заказать справку об отсутствии судимости из России', desc:'Заказывается в МВД РФ (Госуслуги → "Справка о несудимости"). Срок — до 30 дней. Нужен апостиль + нотариальный перевод на русский казахстанского образца. Делай заранее — это самый долгий шаг.', req:true},
+    {id:'v1', name:'Заказать справку об отсутствии судимости из России', desc:'Заказывается в МВД РФ (Госуслуги → "Справка о несудимости"). Срок — до 30 дней. Нужен апостиль — документ уже на русском, перевод не требуется. Делай заранее — это самый долгий шаг.', req:true},
     {id:'v2', name:'Въехать в Казахстан', desc:'Гражданам России виза не нужна — въезд по загранпаспорту или внутреннему паспорту РФ. При въезде на погранпункте выдаётся миграционная карточка. Сохрани её — потребуется при регистрации и выезде.', req:true},
     {id:'v3', name:'Зарегистрироваться по месту пребывания', desc:'Если остаёшься дольше 30 дней — обязательна регистрация в ЦОНе или отделе миграционной полиции. Потребуется: паспорт, миграционная карточка, документ на жильё (договор аренды или согласие собственника). Бесплатно.', link:'https://egov.kz', linkTxt:'Запись в ЦОН через egov.kz', req:true},
     {id:'v4', name:'Получить ИИН', desc:'Индивидуальный идентификационный номер нужен каждому учредителю для регистрации ТОО и открытия банковского счёта. Выдаётся в ЦОНе по паспорту и регистрации. Бесплатно, занимает 1 рабочий день.', link:'https://egov.kz', linkTxt:'egov.kz', req:true},
@@ -368,7 +368,7 @@ function stepVisa(){
       <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Загранпаспорт РФ</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Оригинал + копия, срок действия не менее 6 мес.</td></tr>
       <tr><td style="padding:9px 12px;border:1px solid var(--border)">Миграционная карточка</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Выдаётся при въезде, не терять</td></tr>
       <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Фотографии</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">3,5 × 4,5 см, 4 штуки</td></tr>
-      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Справка об отсутствии судимости из РФ</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Апостиль + нотариальный перевод. Заказывай заранее — до 30 дней</td></tr>
+      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Справка об отсутствии судимости из РФ</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Апостиль. Документ на русском — перевод не нужен. Заказывай заранее — до 30 дней</td></tr>
       <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Медицинская справка</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Флюорография + анализ на ВИЧ. Делается в Казахстане в гос. клинике</td></tr>
       <tr><td style="padding:9px 12px;border:1px solid var(--border)">Документ-основание: свидетельство о регистрации ТОО</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)"><strong>Ключевой документ</strong> — подтверждает статус бизнес-иммигранта</td></tr>
       <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Документ на жильё</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Договор аренды или согласие собственника</td></tr>
@@ -383,7 +383,7 @@ function stepVisa(){
       <div style="margin-bottom:14px">
         <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">За 1–2 месяца до переезда</div>
         <div style="font-size:14px;font-weight:600">Справка о несудимости из РФ</div>
-        <div style="font-size:13px;color:var(--muted)">Заказать на Госуслугах, получить апостиль, нотариальный перевод — суммарно до 30–45 дней</div>
+        <div style="font-size:13px;color:var(--muted)">Заказать на Госуслугах, получить апостиль. Перевод не нужен — документ на русском. Суммарно до 30 дней</div>
       </div>
       <div style="margin-bottom:14px">
         <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 1</div>
@@ -1123,7 +1123,7 @@ Email: ${data.email||'—'}
 // ─────────────────────────────────────────
 function stepFinal(){
   const allChecks = [
-    {label:'Справка о несудимости (апостиль + перевод)', id:'v1', section:'Статус / РВП'},
+    {label:'Справка о несудимости (апостиль)', id:'v1', section:'Статус / РВП'},
     {label:'Въезд, миграционная карточка сохранена', id:'v2', section:'Статус / РВП'},
     {label:'Регистрация по месту пребывания (ЦОН)', id:'v3', section:'Статус / РВП'},
     {label:'Получен ИИН для каждого учредителя', id:'v4', section:'Статус / РВП'},
