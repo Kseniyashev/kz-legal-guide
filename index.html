@@ -324,46 +324,32 @@ function stepIntro(){
 // ─────────────────────────────────────────
 function stepVisa(){
   const checks = [
-    {id:'v1', name:'Въехать в Казахстан', desc:'Гражданам России виза не нужна — въезд по загранпаспорту или внутреннему паспорту РФ. При въезде выдаётся миграционная карточка — сохраняй её.', req:true},
-    {id:'v2', name:'Сохранить миграционную карточку', desc:'Выдаётся на погранпункте. Фиксирует дату въезда. Нужна для регистрации и при выезде.', req:true},
-    {id:'v3', name:'Зарегистрироваться по месту пребывания', desc:'Если остаёшься дольше 30 дней — обязательна регистрация. Идти в ЦОН или МВД (Комитет миграционной службы). Потребуется: паспорт, миграционная карточка, документ на жильё (договор аренды или согласие собственника). Регистрация бесплатна.', link:'https://egov.kz', linkTxt:'Запись в ЦОН через egov.kz', req:true},
-    {id:'v4', name:'Открыть ИИН (если нет)', desc:'Для учредителя ТОО нужен ИИН — Индивидуальный Идентификационный Номер. Гражданам России его выдают в ЦОНе при наличии паспорта и регистрации. ИИН нужен для регистрации ТОО и открытия счёта.', link:'https://egov.kz', linkTxt:'egov.kz — ИИН для иностранца', req:true},
-    {id:'v5', name:'Разрешение на работу — не нужно (ЕАЭС)', desc:'Казахстан и Россия входят в ЕАЭС. Граждане ЕАЭС могут без разрешений работать, открывать ТОО и быть директором в Казахстане — это право закреплено в Договоре о ЕАЭС (ст. 97).', req:false},
-    {id:'v6', name:'Получить ВНЖ (если планируешь жить постоянно)', desc:'Если собираешься жить в Казахстане дольше 1 года — оформи Вид на жительство (ВНЖ). Основание для учредителя ТОО: наличие зарегистрированного юрлица. Подаётся в Комитет миграционной службы МВД РК. Срок рассмотрения — до 30 рабочих дней.', link:'https://www.gov.kz/memleket/entities/mvd-km', linkTxt:'МВД — Комитет миграционной службы', req:false},
+    {id:'v1', name:'Заказать справку об отсутствии судимости из России', desc:'Заказывается в МВД РФ (Госуслуги → "Справка о несудимости"). Срок — до 30 дней. Нужен апостиль + нотариальный перевод на русский казахстанского образца. Делай заранее — это самый долгий шаг.', req:true},
+    {id:'v2', name:'Въехать в Казахстан', desc:'Гражданам России виза не нужна — въезд по загранпаспорту или внутреннему паспорту РФ. При въезде на погранпункте выдаётся миграционная карточка. Сохрани её — потребуется при регистрации и выезде.', req:true},
+    {id:'v3', name:'Зарегистрироваться по месту пребывания', desc:'Если остаёшься дольше 30 дней — обязательна регистрация в ЦОНе или отделе миграционной полиции. Потребуется: паспорт, миграционная карточка, документ на жильё (договор аренды или согласие собственника). Бесплатно.', link:'https://egov.kz', linkTxt:'Запись в ЦОН через egov.kz', req:true},
+    {id:'v4', name:'Получить ИИН', desc:'Индивидуальный идентификационный номер нужен каждому учредителю для регистрации ТОО и открытия банковского счёта. Выдаётся в ЦОНе по паспорту и регистрации. Бесплатно, занимает 1 рабочий день.', link:'https://egov.kz', linkTxt:'egov.kz', req:true},
+    {id:'v5', name:'Зарегистрировать ТОО', desc:'ТОО нужно открыть до подачи на РВП — оно и будет основанием для статуса бизнес-иммигранта. Подробно — на шагах 3–5 этого гида.', req:true},
+    {id:'v6', name:'Подать на РВП с основанием «бизнес-иммигрант»', desc:'После регистрации ТОО — подаёшь заявление в Департамент миграционной полиции МВД на РВП (разрешение на временное проживание). Основание: ты являешься учредителем или директором казахстанского ТОО. Для граждан ЕАЭС (Россия) — упрощённый пакет документов по сравнению с другими иностранцами.', link:'https://www.gov.kz/memleket/entities/mvd-km', linkTxt:'МВД — Комитет миграционной службы', req:true},
+    {id:'v7', name:'Продлевать РВП ежегодно', desc:'РВП выдаётся на 1 год и продлевается каждый год, пока действует ТОО. Продление подаётся за 30 дней до истечения срока в тот же орган.', req:true},
+    {id:'v8', name:'ВНЖ (вид на жительство) — следующий уровень', desc:'После нескольких лет жизни по РВП можно подать на ВНЖ — более долгосрочный документ. Пока твоя цель — РВП как бизнес-иммигрант.', req:false},
   ];
 
   return `
   <div class="sh-tag">Шаг 2 — Подготовка</div>
-  <div class="sh-h1">Легальный статус в Казахстане для граждан России</div>
-  <div class="sh-sub">Россия и Казахстан — члены ЕАЭС, поэтому многие ограничения сняты. Но несколько шагов всё равно нужны — разбираемся по порядку.</div>
+  <div class="sh-h1">Статус бизнес-иммигранта в Казахстане</div>
+  <div class="sh-sub">Чтобы легально жить и вести бизнес в Казахстане, гражданам России нужно оформить РВП с основанием «бизнес-иммигрант». Для этого сначала регистрируется ТОО — оно и даёт основание для статуса.</div>
 
-  <div class="info green"><strong>Хорошая новость для граждан ЕАЭС (Россия, Беларусь, Армения, Кыргызстан):</strong> вы можете открывать ТОО, быть учредителем и директором, нанимать сотрудников в Казахстане <strong>без разрешений на работу</strong>. Это гарантировано Договором о ЕАЭС.</div>
+  <div class="info amber"><strong>Важно о порядке:</strong> есть «курица и яйцо» — для РВП нужно ТОО, а для ТОО нужен ИИН. Значит цепочка такая: <strong>въезд → регистрация → ИИН → ТОО → РВП как бизнес-иммигрант</strong>.</div>
 
-  <div class="card">
-    <div class="card-title"><span class="icon">🗺️</span>Три сценария — выбери свой</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px">
-      <div style="border:2px solid var(--blue);border-radius:10px;padding:14px">
-        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px">Учредитель, живёт в РФ</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.5">Регистрирует ТОО дистанционно через доверенного директора. Периодически приезжает. Без ВНЖ.</div>
-      </div>
-      <div style="border:2px solid var(--green);border-radius:10px;padding:14px">
-        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px">Переезжает и ведёт бизнес</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.5">Въезд → регистрация по месту жительства → ИИН → ТОО. ВНЖ — при желании остаться дольше года.</div>
-      </div>
-      <div style="border:2px solid var(--border);border-radius:10px;padding:14px">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px">Постоянная жизнь в KZ</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.5">Все предыдущие шаги + ВНЖ. Даёт право на постоянное проживание и льготы как у резидента.</div>
-      </div>
-    </div>
-  </div>
+  <div class="info green"><strong>Плюсы ЕАЭС для граждан России:</strong> не нужно разрешение на работу, не нужна виза, упрощённый пакет документов для РВП по сравнению с гражданами третьих стран. Но сам РВП оформлять всё равно нужно.</div>
 
   <div class="card">
-    <div class="card-title"><span class="icon">✅</span>Чеклист: статус и документы</div>
+    <div class="card-title"><span class="icon">✅</span>Полный чеклист: от въезда до РВП</div>
     ${checks.map(c=>`
     <div class="cl-item">
       <div class="cl-box ${data.checks[c.id]?'checked':''}" data-check="${c.id}" onclick="toggleCheck('${c.id}')">${data.checks[c.id]?'✓':''}</div>
       <div class="cl-content">
-        <div class="cl-name">${c.name}<span class="cl-badge ${c.req?'badge-req':'badge-opt'}">${c.req?'обязательно':'по ситуации'}</span></div>
+        <div class="cl-name">${c.name}<span class="cl-badge ${c.req?'badge-req':'badge-opt'}">${c.req?'обязательно':'по желанию'}</span></div>
         <div class="cl-desc">${c.desc}</div>
         ${c.link?`<a class="cl-link" href="${c.link}" target="_blank">→ ${c.linkTxt}</a>`:''}
       </div>
@@ -371,32 +357,63 @@ function stepVisa(){
   </div>
 
   <div class="card">
-    <div class="card-title"><span class="icon">📄</span>ВНЖ для учредителя ТОО — документы</div>
-    <div class="info amber">ВНЖ нужен только если планируешь жить в Казахстане постоянно (дольше 1 года). Для регистрации ТОО ВНЖ <strong>не требуется</strong>.</div>
-    <div style="font-size:14px;margin-bottom:10px;font-weight:600">Что подавать в Комитет миграционной службы МВД:</div>
-    <ul style="margin-left:20px;font-size:14px;line-height:2.1;color:var(--text)">
-      <li>Заявление на ВНЖ (заполняется на месте или через egov.kz)</li>
-      <li>Загранпаспорт + нотариально заверенный перевод</li>
-      <li>Фотографии 3.5×4.5 см (4 шт.)</li>
-      <li>Справка об отсутствии судимости из России (апостиль + перевод)</li>
-      <li>Медицинская справка (форма 086-у или аналог)</li>
-      <li>Документ-основание: свидетельство о регистрации ТОО или решение учредителя</li>
-      <li>Документ на жильё в Казахстане (договор аренды)</li>
-      <li>Квитанция об оплате госпошлины (~4 МРП ≈ 16 000 тенге)</li>
-    </ul>
-    <div class="info blue mt-16"><strong>Срок рассмотрения:</strong> до 30 рабочих дней. ВНЖ выдаётся на 1 год с возможностью продления каждый год, пока действует ТОО.</div>
+    <div class="card-title"><span class="icon">📄</span>Документы для РВП «бизнес-иммигрант»</div>
+    <div class="info blue">Подаётся в Департамент миграционной полиции МВД по месту регистрации. Можно также проверить актуальный список на <a class="cl-link" href="https://egov.kz" target="_blank">egov.kz</a> — услуга «Разрешение на временное проживание».</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+      <tr style="background:var(--bg)">
+        <th style="text-align:left;padding:9px 12px;border:1px solid var(--border);width:55%">Документ</th>
+        <th style="padding:9px 12px;border:1px solid var(--border)">Примечание</th>
+      </tr>
+      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Заявление на РВП</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Заполняется на месте или через egov.kz</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Загранпаспорт РФ</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Оригинал + копия, срок действия не менее 6 мес.</td></tr>
+      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Миграционная карточка</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Выдаётся при въезде, не терять</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Фотографии</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">3,5 × 4,5 см, 4 штуки</td></tr>
+      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Справка об отсутствии судимости из РФ</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Апостиль + нотариальный перевод. Заказывай заранее — до 30 дней</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Медицинская справка</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Флюорография + анализ на ВИЧ. Делается в Казахстане в гос. клинике</td></tr>
+      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Документ-основание: свидетельство о регистрации ТОО</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)"><strong>Ключевой документ</strong> — подтверждает статус бизнес-иммигранта</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:9px 12px;border:1px solid var(--border)">Документ на жильё</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">Договор аренды или согласие собственника</td></tr>
+      <tr><td style="padding:9px 12px;border:1px solid var(--border)">Госпошлина</td><td style="padding:9px 12px;border:1px solid var(--border);color:var(--muted)">~4 МРП ≈ 16 000 тенге (квитанция об оплате)</td></tr>
+    </table>
+    <div class="info blue mt-16"><strong>Срок рассмотрения:</strong> до 15 рабочих дней для граждан ЕАЭС. РВП выдаётся на 1 год, продлевается ежегодно пока действует ТОО.</div>
   </div>
 
   <div class="card">
-    <div class="card-title"><span class="icon">💡</span>Порядок шагов (рекомендуемый)</div>
+    <div class="card-title"><span class="icon">📅</span>Полный таймлайн с учётом РВП</div>
     <div style="padding-left:20px;border-left:2px solid var(--blue-mid)">
-      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">До приезда</div><div style="font-size:14px;font-weight:600">Апостиль на справку о несудимости</div><div style="font-size:13px;color:var(--muted)">Заказать заранее в МВД России — срок изготовления 30 дней</div></div>
-      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 1</div><div style="font-size:14px;font-weight:600">Въезд, сохранить миграционную карточку</div><div style="font-size:13px;color:var(--muted)">Въезд через любой погранпункт по паспорту РФ</div></div>
-      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">До 30 дней</div><div style="font-size:14px;font-weight:600">Регистрация + получение ИИН</div><div style="font-size:13px;color:var(--muted)">ЦОН: паспорт + миграционная карточка + документ на жильё</div></div>
-      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">После регистрации</div><div style="font-size:14px;font-weight:600">Открытие ТОО</div><div style="font-size:13px;color:var(--muted)">Теперь есть всё нужное: ИИН, адрес регистрации — можно идти на шаг 3</div></div>
-      <div><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Параллельно или после ТОО</div><div style="font-size:14px;font-weight:600">Подача на ВНЖ (если нужно)</div><div style="font-size:13px;color:var(--muted)">Основание: являешься учредителем/директором казахстанского ТОО</div></div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">За 1–2 месяца до переезда</div>
+        <div style="font-size:14px;font-weight:600">Справка о несудимости из РФ</div>
+        <div style="font-size:13px;color:var(--muted)">Заказать на Госуслугах, получить апостиль, нотариальный перевод — суммарно до 30–45 дней</div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 1</div>
+        <div style="font-size:14px;font-weight:600">Въезд → миграционная карточка</div>
+        <div style="font-size:13px;color:var(--muted)">Въезд по паспорту РФ, без визы</div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 1–7</div>
+        <div style="font-size:14px;font-weight:600">Аренда жилья + регистрация в ЦОНе</div>
+        <div style="font-size:13px;color:var(--muted)">Договор аренды → регистрация по месту пребывания → ИИН</div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 7–10</div>
+        <div style="font-size:14px;font-weight:600">Регистрация ТОО</div>
+        <div style="font-size:13px;color:var(--muted)">Через egov.kz с ЭЦП — 1 рабочий день. Получаешь свидетельство и БИН</div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 10–15</div>
+        <div style="font-size:14px;font-weight:600">Медсправки + подача на РВП</div>
+        <div style="font-size:13px;color:var(--muted)">Пройти флюорографию и анализ на ВИЧ → собрать пакет → подать в Департамент миграционной полиции</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 25–30</div>
+        <div style="font-size:14px;font-weight:600">Получение РВП 🎉</div>
+        <div style="font-size:13px;color:var(--muted)">Разрешение на временное проживание с основанием «бизнес-иммигрант». Действует 1 год.</div>
+      </div>
     </div>
   </div>
+
+  <div class="info amber"><strong>Уточняй актуальный список документов</strong> в Департаменте миграционной полиции своего города или на egov.kz — требования периодически обновляются.</div>
 
   <div class="btn-group">
     <button class="btn btn-secondary" onclick="prev()">← Назад</button>
@@ -1106,10 +1123,12 @@ Email: ${data.email||'—'}
 // ─────────────────────────────────────────
 function stepFinal(){
   const allChecks = [
-    {label:'Въезд, миграционная карточка сохранена', id:'v1', section:'Статус в Казахстане'},
-    {label:'Регистрация по месту пребывания (ЦОН)', id:'v3', section:'Статус в Казахстане'},
-    {label:'Получен ИИН для каждого учредителя', id:'v4', section:'Статус в Казахстане'},
-    {label:'ВНЖ оформлен (если живёшь постоянно)', id:'v6', section:'Статус в Казахстане'},
+    {label:'Справка о несудимости (апостиль + перевод)', id:'v1', section:'Статус / РВП'},
+    {label:'Въезд, миграционная карточка сохранена', id:'v2', section:'Статус / РВП'},
+    {label:'Регистрация по месту пребывания (ЦОН)', id:'v3', section:'Статус / РВП'},
+    {label:'Получен ИИН для каждого учредителя', id:'v4', section:'Статус / РВП'},
+    {label:'РВП подано (после регистрации ТОО)', id:'v6', section:'Статус / РВП'},
+    {label:'РВП получено — статус «бизнес-иммигрант»', id:'v7', section:'Статус / РВП'},
     {label:'Получена ЭЦП', id:'r1', section:'Регистрация ТОО'},
     {label:'Проверено название компании', id:'r2', section:'Регистрация ТОО'},
     {label:'Подана заявка на регистрацию', id:'r3', section:'Регистрация ТОО'},
