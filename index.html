@@ -179,14 +179,15 @@
 //  STATE
 // ─────────────────────────────────────────
 const STEPS = [
-  {id:'intro',      title:'Введение',           section:'Начало'},
-  {id:'data',       title:'Данные компании',     section:'Открытие ТОО'},
-  {id:'docs',       title:'Документы ТОО',       section:'Открытие ТОО'},
-  {id:'register',   title:'Регистрация',         section:'Открытие ТОО'},
-  {id:'postreg',    title:'После регистрации',   section:'Открытие ТОО'},
-  {id:'hubinfo',    title:'Что такое Astana Hub',section:'Astana Hub'},
-  {id:'hubapp',     title:'Заявка в Hub',        section:'Astana Hub'},
-  {id:'final',      title:'Финальный чеклист',   section:'Astana Hub'},
+  {id:'intro',      title:'Введение',              section:'Начало'},
+  {id:'visa',       title:'Статус в Казахстане',   section:'Подготовка'},
+  {id:'data',       title:'Данные компании',        section:'Открытие ТОО'},
+  {id:'docs',       title:'Документы ТОО',          section:'Открытие ТОО'},
+  {id:'register',   title:'Регистрация',            section:'Открытие ТОО'},
+  {id:'postreg',    title:'После регистрации',      section:'Открытие ТОО'},
+  {id:'hubinfo',    title:'Что такое Astana Hub',   section:'Astana Hub'},
+  {id:'hubapp',     title:'Заявка в Hub',           section:'Astana Hub'},
+  {id:'final',      title:'Финальный чеклист',      section:'Astana Hub'},
 ];
 
 const DEFAULT_DATA = {
@@ -297,10 +298,11 @@ function stepIntro(){
 
   <div class="card">
     <div class="card-title"><span class="icon">🗺️</span>Что тебя ждёт</div>
-    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Шаг 1–2: Вводишь данные компании и учредителей</div><div class="cl-desc">Один раз — используется везде</div></div></div>
-    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 3: Получаешь готовые документы</div><div class="cl-desc">Устав ТОО и Решение учредителя — сгенерированы автоматически</div></div></div>
-    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 4–5: Регистрируешь ТОО</div><div class="cl-desc">Пошаговый чеклист: egov.kz или ЦОН, налоговая, банк</div></div></div>
-    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 6–7: Подаёшь заявку в Astana Hub</div><div class="cl-desc">Предзаполненная анкета + что писать в бизнес-плане</div></div></div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Шаг 2: Статус в Казахстане (для граждан России)</div><div class="cl-desc">Регистрация по месту жительства, ИИН, ВНЖ — что нужно, а что нет по правилам ЕАЭС</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 3: Вводишь данные компании и учредителей</div><div class="cl-desc">Один раз — используется везде</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 4: Получаешь готовые документы</div><div class="cl-desc">Устав ТОО и Решение учредителя — сгенерированы автоматически</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 5–6: Регистрируешь ТОО</div><div class="cl-desc">Пошаговый чеклист: egov.kz или ЦОН, налоговая, банк</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 7–8: Подаёшь заявку в Astana Hub</div><div class="cl-desc">Предзаполненная анкета + что писать в бизнес-плане</div></div></div>
   </div>
 
   <div class="card">
@@ -316,6 +318,89 @@ function stepIntro(){
 
   <div class="btn-group">
     <button class="btn btn-primary" onclick="next()">Начать → Ввести данные компании</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+function stepVisa(){
+  const checks = [
+    {id:'v1', name:'Въехать в Казахстан', desc:'Гражданам России виза не нужна — въезд по загранпаспорту или внутреннему паспорту РФ. При въезде выдаётся миграционная карточка — сохраняй её.', req:true},
+    {id:'v2', name:'Сохранить миграционную карточку', desc:'Выдаётся на погранпункте. Фиксирует дату въезда. Нужна для регистрации и при выезде.', req:true},
+    {id:'v3', name:'Зарегистрироваться по месту пребывания', desc:'Если остаёшься дольше 30 дней — обязательна регистрация. Идти в ЦОН или МВД (Комитет миграционной службы). Потребуется: паспорт, миграционная карточка, документ на жильё (договор аренды или согласие собственника). Регистрация бесплатна.', link:'https://egov.kz', linkTxt:'Запись в ЦОН через egov.kz', req:true},
+    {id:'v4', name:'Открыть ИИН (если нет)', desc:'Для учредителя ТОО нужен ИИН — Индивидуальный Идентификационный Номер. Гражданам России его выдают в ЦОНе при наличии паспорта и регистрации. ИИН нужен для регистрации ТОО и открытия счёта.', link:'https://egov.kz', linkTxt:'egov.kz — ИИН для иностранца', req:true},
+    {id:'v5', name:'Разрешение на работу — не нужно (ЕАЭС)', desc:'Казахстан и Россия входят в ЕАЭС. Граждане ЕАЭС могут без разрешений работать, открывать ТОО и быть директором в Казахстане — это право закреплено в Договоре о ЕАЭС (ст. 97).', req:false},
+    {id:'v6', name:'Получить ВНЖ (если планируешь жить постоянно)', desc:'Если собираешься жить в Казахстане дольше 1 года — оформи Вид на жительство (ВНЖ). Основание для учредителя ТОО: наличие зарегистрированного юрлица. Подаётся в Комитет миграционной службы МВД РК. Срок рассмотрения — до 30 рабочих дней.', link:'https://www.gov.kz/memleket/entities/mvd-km', linkTxt:'МВД — Комитет миграционной службы', req:false},
+  ];
+
+  return `
+  <div class="sh-tag">Шаг 2 — Подготовка</div>
+  <div class="sh-h1">Легальный статус в Казахстане для граждан России</div>
+  <div class="sh-sub">Россия и Казахстан — члены ЕАЭС, поэтому многие ограничения сняты. Но несколько шагов всё равно нужны — разбираемся по порядку.</div>
+
+  <div class="info green"><strong>Хорошая новость для граждан ЕАЭС (Россия, Беларусь, Армения, Кыргызстан):</strong> вы можете открывать ТОО, быть учредителем и директором, нанимать сотрудников в Казахстане <strong>без разрешений на работу</strong>. Это гарантировано Договором о ЕАЭС.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🗺️</span>Три сценария — выбери свой</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px">
+      <div style="border:2px solid var(--blue);border-radius:10px;padding:14px">
+        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px">Учредитель, живёт в РФ</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.5">Регистрирует ТОО дистанционно через доверенного директора. Периодически приезжает. Без ВНЖ.</div>
+      </div>
+      <div style="border:2px solid var(--green);border-radius:10px;padding:14px">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px">Переезжает и ведёт бизнес</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.5">Въезд → регистрация по месту жительства → ИИН → ТОО. ВНЖ — при желании остаться дольше года.</div>
+      </div>
+      <div style="border:2px solid var(--border);border-radius:10px;padding:14px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px">Постоянная жизнь в KZ</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.5">Все предыдущие шаги + ВНЖ. Даёт право на постоянное проживание и льготы как у резидента.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✅</span>Чеклист: статус и документы</div>
+    ${checks.map(c=>`
+    <div class="cl-item">
+      <div class="cl-box ${data.checks[c.id]?'checked':''}" data-check="${c.id}" onclick="toggleCheck('${c.id}')">${data.checks[c.id]?'✓':''}</div>
+      <div class="cl-content">
+        <div class="cl-name">${c.name}<span class="cl-badge ${c.req?'badge-req':'badge-opt'}">${c.req?'обязательно':'по ситуации'}</span></div>
+        <div class="cl-desc">${c.desc}</div>
+        ${c.link?`<a class="cl-link" href="${c.link}" target="_blank">→ ${c.linkTxt}</a>`:''}
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📄</span>ВНЖ для учредителя ТОО — документы</div>
+    <div class="info amber">ВНЖ нужен только если планируешь жить в Казахстане постоянно (дольше 1 года). Для регистрации ТОО ВНЖ <strong>не требуется</strong>.</div>
+    <div style="font-size:14px;margin-bottom:10px;font-weight:600">Что подавать в Комитет миграционной службы МВД:</div>
+    <ul style="margin-left:20px;font-size:14px;line-height:2.1;color:var(--text)">
+      <li>Заявление на ВНЖ (заполняется на месте или через egov.kz)</li>
+      <li>Загранпаспорт + нотариально заверенный перевод</li>
+      <li>Фотографии 3.5×4.5 см (4 шт.)</li>
+      <li>Справка об отсутствии судимости из России (апостиль + перевод)</li>
+      <li>Медицинская справка (форма 086-у или аналог)</li>
+      <li>Документ-основание: свидетельство о регистрации ТОО или решение учредителя</li>
+      <li>Документ на жильё в Казахстане (договор аренды)</li>
+      <li>Квитанция об оплате госпошлины (~4 МРП ≈ 16 000 тенге)</li>
+    </ul>
+    <div class="info blue mt-16"><strong>Срок рассмотрения:</strong> до 30 рабочих дней. ВНЖ выдаётся на 1 год с возможностью продления каждый год, пока действует ТОО.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💡</span>Порядок шагов (рекомендуемый)</div>
+    <div style="padding-left:20px;border-left:2px solid var(--blue-mid)">
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">До приезда</div><div style="font-size:14px;font-weight:600">Апостиль на справку о несудимости</div><div style="font-size:13px;color:var(--muted)">Заказать заранее в МВД России — срок изготовления 30 дней</div></div>
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 1</div><div style="font-size:14px;font-weight:600">Въезд, сохранить миграционную карточку</div><div style="font-size:13px;color:var(--muted)">Въезд через любой погранпункт по паспорту РФ</div></div>
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">До 30 дней</div><div style="font-size:14px;font-weight:600">Регистрация + получение ИИН</div><div style="font-size:13px;color:var(--muted)">ЦОН: паспорт + миграционная карточка + документ на жильё</div></div>
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">После регистрации</div><div style="font-size:14px;font-weight:600">Открытие ТОО</div><div style="font-size:13px;color:var(--muted)">Теперь есть всё нужное: ИИН, адрес регистрации — можно идти на шаг 3</div></div>
+      <div><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Параллельно или после ТОО</div><div style="font-size:14px;font-weight:600">Подача на ВНЖ (если нужно)</div><div style="font-size:13px;color:var(--muted)">Основание: являешься учредителем/директором казахстанского ТОО</div></div>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="next()">Далее → Данные компании</button>
   </div>`;
 }
 
@@ -1021,6 +1106,10 @@ Email: ${data.email||'—'}
 // ─────────────────────────────────────────
 function stepFinal(){
   const allChecks = [
+    {label:'Въезд, миграционная карточка сохранена', id:'v1', section:'Статус в Казахстане'},
+    {label:'Регистрация по месту пребывания (ЦОН)', id:'v3', section:'Статус в Казахстане'},
+    {label:'Получен ИИН для каждого учредителя', id:'v4', section:'Статус в Казахстане'},
+    {label:'ВНЖ оформлен (если живёшь постоянно)', id:'v6', section:'Статус в Казахстане'},
     {label:'Получена ЭЦП', id:'r1', section:'Регистрация ТОО'},
     {label:'Проверено название компании', id:'r2', section:'Регистрация ТОО'},
     {label:'Подана заявка на регистрацию', id:'r3', section:'Регистрация ТОО'},
@@ -1101,6 +1190,7 @@ function render(){
   const step = STEPS[currentStep].id;
   const map = {
     intro: stepIntro,
+    visa: stepVisa,
     data: stepData,
     docs: stepDocs,
     register: stepRegister,
