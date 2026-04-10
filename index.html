@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Открытие ТОО + Astana Hub — Гид</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --blue:#1a56db;--blue-light:#e8f0fe;--blue-mid:#c3d8ff;
+      --green:#0e9f6e;--green-light:#def7ec;
+      --amber:#d97706;--amber-light:#fef3c7;
+      --red:#dc2626;--red-light:#fee2e2;
+      --text:#111827;--muted:#6b7280;--border:#e5e7eb;
+      --bg:#f9fafb;--white:#fff;
+      --sidebar:260px;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--text);background:var(--bg);min-height:100vh}
+
+    /* HEADER */
+    .hdr{background:var(--white);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 24px;gap:20px;position:sticky;top:0;z-index:100}
+    .hdr-logo{font-size:15px;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:8px}
+    .hdr-logo span{font-size:20px}
+    .prog-wrap{flex:1;max-width:320px}
+    .prog-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+    .prog-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .35s ease}
+    .prog-lbl{font-size:11px;color:var(--muted);margin-top:3px;text-align:right}
+
+    /* LAYOUT */
+    .layout{display:flex;min-height:calc(100vh - 58px)}
+
+    /* SIDEBAR */
+    .sidebar{width:var(--sidebar);background:var(--white);border-right:1px solid var(--border);padding:20px 0;position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;flex-shrink:0}
+    .sb-section{padding:4px 0 8px}
+    .sb-title{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:8px 20px 4px}
+    .sb-item{display:flex;align-items:center;gap:10px;padding:8px 20px;cursor:pointer;font-size:13.5px;color:var(--muted);border-left:3px solid transparent;transition:all .15s;user-select:none}
+    .sb-item:hover{background:var(--bg)}
+    .sb-item.active{background:var(--blue-light);color:var(--blue);border-left-color:var(--blue);font-weight:600}
+    .sb-item.done{color:var(--green)}
+    .sb-num{width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .15s}
+    .sb-item.done .sb-num{background:var(--green);border-color:var(--green);color:#fff}
+    .sb-item.done .sb-num::before{content:'✓'}
+
+    /* MAIN */
+    .main{flex:1;padding:36px 40px;max-width:860px}
+
+    /* STEP HEADER */
+    .sh-tag{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:6px}
+    .sh-h1{font-size:28px;font-weight:800;margin-bottom:8px;line-height:1.2}
+    .sh-sub{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:28px}
+
+    /* CARDS */
+    .card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:18px}
+    .card-title{font-size:16px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .card-title .icon{font-size:18px}
+
+    /* HIGHLIGHT GRID */
+    .hl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+    .hl-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 16px;text-align:center}
+    .hl-val{font-size:26px;font-weight:800;color:var(--blue);margin-bottom:4px}
+    .hl-lbl{font-size:12px;color:var(--muted);line-height:1.4}
+
+    /* INFO BLOCKS */
+    .info{border-radius:8px;padding:13px 16px;font-size:13.5px;line-height:1.6;margin-bottom:16px}
+    .info.blue{background:var(--blue-light);border:1px solid var(--blue-mid)}
+    .info.green{background:var(--green-light);border:1px solid #a7d7c5}
+    .info.amber{background:var(--amber-light);border:1px solid #fcd34d}
+    .info strong{font-weight:600}
+
+    /* FORMS */
+    .fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+    .fg label{font-size:13px;font-weight:600;color:var(--text)}
+    .fg .hint{font-weight:400;color:var(--muted)}
+    input,textarea,select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;color:var(--text);transition:border-color .15s;background:var(--white)}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,219,.1)}
+    textarea{resize:vertical;min-height:80px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-row.three{grid-template-columns:2fr 2fr 1fr}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit;text-decoration:none}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-primary:hover{background:#1649c0}
+    .btn-secondary{background:var(--white);color:var(--text);border:1px solid var(--border)}
+    .btn-secondary:hover{background:var(--bg)}
+    .btn-green{background:var(--green);color:#fff}
+    .btn-green:hover{background:#0a8a5c}
+    .btn-sm{padding:6px 14px;font-size:13px}
+    .btn-group{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+
+    /* CHECKLIST */
+    .cl-item{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
+    .cl-item:last-child{border-bottom:none}
+    .cl-box{width:20px;height:20px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .15s}
+    .cl-box.checked{background:var(--green);border-color:var(--green);color:#fff;font-size:12px}
+    .cl-content{flex:1}
+    .cl-name{font-size:14px;font-weight:600;margin-bottom:3px}
+    .cl-desc{font-size:13px;color:var(--muted);line-height:1.5}
+    .cl-link{display:inline-block;margin-top:5px;font-size:12.5px;color:var(--blue);text-decoration:none}
+    .cl-link:hover{text-decoration:underline}
+    .cl-badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:600}
+    .badge-req{background:var(--red-light);color:var(--red)}
+    .badge-opt{background:var(--amber-light);color:var(--amber)}
+
+    /* FOUNDERS */
+    .founder-block{border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;position:relative}
+    .founder-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:12px}
+    .rm-btn{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:14px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s}
+    .rm-btn:hover{background:var(--red-light);color:var(--red);border-color:#fca5a5}
+
+    /* DOCUMENT OUTPUT */
+    .doc-out{background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:20px;font-size:12.5px;line-height:1.9;max-height:420px;overflow-y:auto;white-space:pre-wrap;font-family:'Courier New',monospace;margin-bottom:10px;color:#1f2937}
+    .doc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+
+    /* TABS */
+    .tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:22px}
+    .tab{padding:10px 18px;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--muted);font-weight:500;transition:all .15s}
+    .tab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:700}
+
+    /* BENEFITS */
+    .benefit-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+    .benefit{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .benefit-icon{font-size:22px;margin-bottom:8px}
+    .benefit-val{font-size:18px;font-weight:800;color:var(--green);margin-bottom:4px}
+    .benefit-name{font-size:13px;font-weight:600;margin-bottom:3px}
+    .benefit-desc{font-size:12px;color:var(--muted);line-height:1.5}
+
+    /* HUB FORM */
+    .hub-field{margin-bottom:16px}
+    .hub-field-label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:5px}
+    .hub-field-auto{background:var(--blue-light);border:1px solid var(--blue-mid);border-radius:7px;padding:9px 13px;font-size:14px;font-weight:500;color:var(--blue)}
+    .hub-field-auto.empty{color:var(--muted);font-style:italic;background:var(--bg)}
+
+    /* FINAL TABLE */
+    .final-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+    .final-row:last-child{border-bottom:none}
+    .f-status{padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
+    .f-done{background:var(--green-light);color:var(--green)}
+    .f-pending{background:var(--amber-light);color:var(--amber)}
+
+    /* MISC */
+    .sep{height:1px;background:var(--border);margin:18px 0}
+    .tag{display:inline-flex;align-items:center;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600}
+    .tag-blue{background:var(--blue-light);color:var(--blue)}
+    .tag-green{background:var(--green-light);color:var(--green)}
+    .hidden{display:none!important}
+    .mt-8{margin-top:8px}
+    .mt-16{margin-top:16px}
+    small{font-size:12px;color:var(--muted)}
+
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+    @media(max-width:800px){
+      .sidebar{display:none}
+      .main{padding:20px 16px}
+      .form-row,.two-col{grid-template-columns:1fr}
+      .form-row.three{grid-template-columns:1fr}
+      .hl-grid,.benefit-row{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-logo"><span>🇰🇿</span>ТОО + Astana Hub</div>
+  <div class="prog-wrap">
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+    <div class="prog-lbl" id="progLbl">Шаг 1 из 8</div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar"></aside>
+  <main class="main" id="mainContent"></main>
+</div>
+
+<script>
+// ─────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────
+const STEPS = [
+  {id:'intro',      title:'Введение',           section:'Начало'},
+  {id:'data',       title:'Данные компании',     section:'Открытие ТОО'},
+  {id:'docs',       title:'Документы ТОО',       section:'Открытие ТОО'},
+  {id:'register',   title:'Регистрация',         section:'Открытие ТОО'},
+  {id:'postreg',    title:'После регистрации',   section:'Открытие ТОО'},
+  {id:'hubinfo',    title:'Что такое Astana Hub',section:'Astana Hub'},
+  {id:'hubapp',     title:'Заявка в Hub',        section:'Astana Hub'},
+  {id:'final',      title:'Финальный чеклист',   section:'Astana Hub'},
+];
+
+const DEFAULT_DATA = {
+  companyRu:'',companyEn:'',city:'Алматы',address:'',okved:'62.01',capital:'100000',
+  director:'',directorIin:'',
+  founders:[{name:'',iin:'',share:'100'}],
+  regMethod:'online',
+  bizDesc:'',product:'',market:'',teamSize:'',website:'',
+  checks:{},
+};
+
+let currentStep = 0;
+let activeTab = 0;
+let data = JSON.parse(localStorage.getItem('kzlegal_data') || 'null') || JSON.parse(JSON.stringify(DEFAULT_DATA));
+currentStep = parseInt(localStorage.getItem('kzlegal_step') || '0');
+
+function save(){
+  localStorage.setItem('kzlegal_data', JSON.stringify(data));
+  localStorage.setItem('kzlegal_step', currentStep);
+}
+
+// ─────────────────────────────────────────
+//  NAVIGATION
+// ─────────────────────────────────────────
+function goTo(n){
+  if(n < 0 || n >= STEPS.length) return;
+  currentStep = n;
+  save();
+  render();
+  window.scrollTo(0,0);
+}
+function next(){ goTo(currentStep+1) }
+function prev(){ goTo(currentStep-1) }
+
+// ─────────────────────────────────────────
+//  SIDEBAR
+// ─────────────────────────────────────────
+function renderSidebar(){
+  const el = document.getElementById('sidebar');
+  let sections = {};
+  STEPS.forEach((s,i)=>{
+    if(!sections[s.section]) sections[s.section]=[];
+    sections[s.section].push({...s,i});
+  });
+  let html='';
+  Object.entries(sections).forEach(([sec,items])=>{
+    html+=`<div class="sb-section"><div class="sb-title">${sec}</div>`;
+    items.forEach(({title,i})=>{
+      const cls = i===currentStep?'active':i<currentStep?'done':'';
+      const num = cls==='done'?'':i+1;
+      html+=`<div class="sb-item ${cls}" onclick="goTo(${i})">
+        <div class="sb-num">${num}</div>${title}
+      </div>`;
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+
+function renderProgress(){
+  const pct = Math.round((currentStep/(STEPS.length-1))*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progLbl').textContent = `Шаг ${currentStep+1} из ${STEPS.length}`;
+}
+
+// ─────────────────────────────────────────
+//  HELPER: bind form fields
+// ─────────────────────────────────────────
+function bindField(id, key, founderIdx){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('input', ()=>{
+    if(founderIdx !== undefined){
+      data.founders[founderIdx][key] = el.value;
+    } else {
+      data[key] = el.value;
+    }
+    save();
+  });
+}
+
+function toggleCheck(id){
+  data.checks[id] = !data.checks[id];
+  save();
+  renderSidebar();
+  renderProgress();
+  const box = document.querySelector(`[data-check="${id}"]`);
+  if(box){
+    box.className = 'cl-box'+(data.checks[id]?' checked':'');
+    box.textContent = data.checks[id]?'✓':'';
+  }
+}
+
+// ─────────────────────────────────────────
+//  STEPS
+// ─────────────────────────────────────────
+function stepIntro(){
+  return `
+  <div class="sh-tag">Шаг 1 — Начало</div>
+  <div class="sh-h1">Открываем ТОО и становимся резидентом Astana Hub</div>
+  <div class="sh-sub">Этот гид проведёт тебя через весь процесс — от регистрации юрлица до получения статуса резидента Astana Hub. Заполни данные один раз, получи все готовые документы и пошаговые инструкции.</div>
+
+  <div class="hl-grid">
+    <div class="hl-card"><div class="hl-val">1–3</div><div class="hl-lbl">рабочих дня на регистрацию ТОО</div></div>
+    <div class="hl-card"><div class="hl-val">0%</div><div class="hl-lbl">налог на прибыль для резидентов Hub</div></div>
+    <div class="hl-card"><div class="hl-val">30</div><div class="hl-lbl">дней рассматривают заявку в Astana Hub</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🗺️</span>Что тебя ждёт</div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Шаг 1–2: Вводишь данные компании и учредителей</div><div class="cl-desc">Один раз — используется везде</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 3: Получаешь готовые документы</div><div class="cl-desc">Устав ТОО и Решение учредителя — сгенерированы автоматически</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 4–5: Регистрируешь ТОО</div><div class="cl-desc">Пошаговый чеклист: egov.kz или ЦОН, налоговая, банк</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Шаг 6–7: Подаёшь заявку в Astana Hub</div><div class="cl-desc">Предзаполненная анкета + что писать в бизнес-плане</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span>Что нужно подготовить заранее</div>
+    <div class="info blue"><strong>ЭЦП (электронная цифровая подпись)</strong> — нужна для онлайн-регистрации. Получи на <a class="cl-link" href="https://pki.gov.kz" target="_blank">pki.gov.kz</a> или в любом ЦОНе (бесплатно).</div>
+    <ul style="margin-left:20px;font-size:14px;line-height:2;color:var(--text)">
+      <li>ИИН всех учредителей</li>
+      <li>Придуманное название компании (на рус. и анг.)</li>
+      <li>Юридический адрес (можно домашний или офис)</li>
+      <li>Описание бизнеса / продукта (для заявки в Hub)</li>
+    </ul>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="next()">Начать → Ввести данные компании</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+function stepData(){
+  const f = data.founders;
+  let foundersHtml = f.map((fo,i)=>`
+    <div class="founder-block" id="founder-${i}">
+      <div class="founder-title">Учредитель ${i+1}</div>
+      ${i>0?`<button class="rm-btn" onclick="removeFounder(${i})">✕</button>`:''}
+      <div class="form-row">
+        <div class="fg"><label>ФИО</label><input id="fn_name_${i}" value="${fo.name}" placeholder="Иванов Иван Иванович"></div>
+        <div class="fg"><label>ИИН <span class="hint">(12 цифр)</span></label><input id="fn_iin_${i}" value="${fo.iin}" placeholder="000000000000" maxlength="12"></div>
+      </div>
+      <div class="fg" style="max-width:160px"><label>Доля, %</label><input id="fn_share_${i}" type="number" value="${fo.share}" min="1" max="100"></div>
+    </div>`).join('');
+
+  return `
+  <div class="sh-tag">Шаг 2 — Данные</div>
+  <div class="sh-h1">Данные компании и учредителей</div>
+  <div class="sh-sub">Заполни один раз — эти данные автоматически подставятся в документы и заявку в Astana Hub.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🏢</span>Компания</div>
+    <div class="form-row">
+      <div class="fg"><label>Название ТОО на русском</label><input id="f_companyRu" value="${data.companyRu}" placeholder="Технологии Будущего"></div>
+      <div class="fg"><label>Название на английском</label><input id="f_companyEn" value="${data.companyEn}" placeholder="Future Technologies"></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Город</label>
+        <select id="f_city">
+          ${['Алматы','Астана','Шымкент','Другой'].map(c=>`<option ${data.city===c?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg"><label>Уставный капитал, тенге</label><input id="f_capital" value="${data.capital}" placeholder="100000" type="number"></div>
+    </div>
+    <div class="fg"><label>Юридический адрес</label><input id="f_address" value="${data.address}" placeholder="г. Алматы, ул. Абая, д. 10, оф. 5"></div>
+    <div class="fg">
+      <label>ОКЭД (вид деятельности) <span class="hint">— основной</span></label>
+      <select id="f_okved">
+        <option value="62.01" ${data.okved==='62.01'?'selected':''}>62.01 — Разработка программного обеспечения</option>
+        <option value="62.02" ${data.okved==='62.02'?'selected':''}>62.02 — Консультирование в области ИТ</option>
+        <option value="62.09" ${data.okved==='62.09'?'selected':''}>62.09 — Прочая деятельность в области ИТ</option>
+        <option value="63.11" ${data.okved==='63.11'?'selected':''}>63.11 — Обработка данных, размещение информации</option>
+        <option value="63.12" ${data.okved==='63.12'?'selected':''}>63.12 — Деятельность веб-порталов</option>
+        <option value="74.90" ${data.okved==='74.90'?'selected':''}>74.90 — Прочая профессиональная деятельность</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">👤</span>Директор</div>
+    <div class="form-row">
+      <div class="fg"><label>ФИО директора</label><input id="f_director" value="${data.director}" placeholder="Иванов Иван Иванович"></div>
+      <div class="fg"><label>ИИН директора</label><input id="f_directorIin" value="${data.directorIin}" placeholder="000000000000" maxlength="12"></div>
+    </div>
+    <div class="info amber"><strong>Совет:</strong> Директор может быть одним из учредителей.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">👥</span>Учредители</div>
+    <div id="founders-list">${foundersHtml}</div>
+    <button class="btn btn-secondary btn-sm" onclick="addFounder()">+ Добавить учредителя</button>
+    <div class="info blue mt-16">Сумма долей всех учредителей должна быть равна 100%.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💡</span>О бизнесе (для заявки в Astana Hub)</div>
+    <div class="fg"><label>Краткое описание компании / продукта</label><textarea id="f_bizDesc" placeholder="Мы разрабатываем SaaS-платформу для автоматизации финансового учёта малого бизнеса...">${data.bizDesc}</textarea></div>
+    <div class="form-row">
+      <div class="fg"><label>Что за продукт / сервис</label><input id="f_product" value="${data.product}" placeholder="B2B SaaS, мобильное приложение..."></div>
+      <div class="fg"><label>Целевой рынок</label><input id="f_market" value="${data.market}" placeholder="МСБ Казахстана, СНГ..."></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Размер команды</label><input id="f_teamSize" value="${data.teamSize}" placeholder="3" type="number"></div>
+      <div class="fg"><label>Сайт / лендинг (если есть)</label><input id="f_website" value="${data.website}" placeholder="mycompany.kz"></div>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="saveDataAndNext()">Сохранить и далее →</button>
+  </div>`;
+}
+
+function afterRenderData(){
+  bindField('f_companyRu','companyRu');
+  bindField('f_companyEn','companyEn');
+  bindField('f_city','city');
+  bindField('f_address','address');
+  bindField('f_okved','okved');
+  bindField('f_capital','capital');
+  bindField('f_director','director');
+  bindField('f_directorIin','directorIin');
+  bindField('f_bizDesc','bizDesc');
+  bindField('f_product','product');
+  bindField('f_market','market');
+  bindField('f_teamSize','teamSize');
+  bindField('f_website','website');
+  data.founders.forEach((_,i)=>{
+    bindField(`fn_name_${i}`,'name',i);
+    bindField(`fn_iin_${i}`,'iin',i);
+    bindField(`fn_share_${i}`,'share',i);
+  });
+}
+
+function addFounder(){
+  data.founders.push({name:'',iin:'',share:'0'});
+  save();
+  render();
+}
+function removeFounder(i){
+  data.founders.splice(i,1);
+  save();
+  render();
+}
+function saveDataAndNext(){
+  // pull current values from DOM
+  ['companyRu','companyEn','address','capital','director','directorIin','bizDesc','product','market','teamSize','website'].forEach(k=>{
+    const el=document.getElementById('f_'+k);
+    if(el) data[k]=el.value;
+  });
+  ['city','okved'].forEach(k=>{
+    const el=document.getElementById('f_'+k);
+    if(el) data[k]=el.value;
+  });
+  data.founders.forEach((_,i)=>{
+    ['name','iin','share'].forEach(k=>{
+      const el=document.getElementById(`fn_${k}_${i}`);
+      if(el) data.founders[i][k]=el.value;
+    });
+  });
+  save();
+  next();
+}
+
+// ─────────────────────────────────────────
+function getDate(){
+  return new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
+}
+function getYear(){return new Date().getFullYear()}
+
+function genUstav(){
+  const nm = data.companyRu || '[НАЗВАНИЕ ТОО]';
+  const addr = data.address || '[ЮРИДИЧЕСКИЙ АДРЕС]';
+  const city = data.city || 'Алматы';
+  const cap = parseInt(data.capital||0).toLocaleString('ru-RU');
+  const dir = data.director || '[ФИО ДИРЕКТОРА]';
+  const founders = data.founders.map(f=>`${f.name||'[ФИО]'} (ИИН: ${f.iin||'—'}) — ${f.share}%`).join('\n   ');
+  const okvedName = document.getElementById('f_okved')?.options[document.getElementById('f_okved')?.selectedIndex]?.text || 'разработка программного обеспечения';
+
+  return `УСТАВ
+Товарищества с ограниченной ответственностью
+«${nm}»
+
+г. ${city}, ${getYear()} г.
+
+═══════════════════════════════════════════════
+
+1. ОБЩИЕ ПОЛОЖЕНИЯ
+
+1.1. Товарищество с ограниченной ответственностью «${nm}» (далее — Товарищество) создано в соответствии с Гражданским кодексом Республики Казахстан и Законом Республики Казахстан от 22 апреля 1998 года «О товариществах с ограниченной и дополнительной ответственностью».
+
+1.2. Полное наименование: Товарищество с ограниченной ответственностью «${nm}».
+
+1.3. Место нахождения (юридический адрес): ${addr}.
+
+1.4. Товарищество является юридическим лицом с момента государственной регистрации, имеет самостоятельный баланс, банковские счета, печать и штамп.
+
+1.5. Товарищество создано на неопределённый срок.
+
+═══════════════════════════════════════════════
+
+2. ЦЕЛИ И ВИДЫ ДЕЯТЕЛЬНОСТИ
+
+2.1. Целью деятельности Товарищества является извлечение дохода.
+
+2.2. Основной вид деятельности: ${okvedName} (ОКЭД ${data.okved}).
+
+2.3. Товарищество вправе осуществлять любые виды деятельности, не запрещённые законодательством Республики Казахстан.
+
+═══════════════════════════════════════════════
+
+3. УСТАВНЫЙ КАПИТАЛ
+
+3.1. Уставный капитал Товарищества составляет ${cap} (${numToWords(data.capital)}) тенге.
+
+3.2. Состав участников и размер их долей:
+   ${founders}
+
+3.3. Вклады участников в уставный капитал могут вноситься деньгами, ценными бумагами, вещами и имущественными правами.
+
+═══════════════════════════════════════════════
+
+4. ПРАВА И ОБЯЗАННОСТИ УЧАСТНИКОВ
+
+4.1. Участник вправе:
+   — участвовать в управлении делами Товарищества;
+   — получать информацию о деятельности Товарищества;
+   — принимать участие в распределении прибыли;
+   — получить в случае ликвидации часть имущества, оставшегося после расчётов с кредиторами;
+   — выйти из состава Товарищества в установленном порядке.
+
+4.2. Участник обязан:
+   — вносить вклады в уставный капитал в порядке, размерах и в сроки, предусмотренные настоящим Уставом;
+   — не разглашать конфиденциальную информацию о деятельности Товарищества.
+
+═══════════════════════════════════════════════
+
+5. ОРГАНЫ УПРАВЛЕНИЯ
+
+5.1. Высшим органом Товарищества является Общее собрание участников (при единственном участнике — решение единственного участника).
+
+5.2. Исполнительным органом является Директор. Директором назначается ${dir}.
+
+5.3. Директор:
+   — действует от имени Товарищества без доверенности;
+   — представляет интересы Товарищества во всех органах и организациях;
+   — заключает договоры и совершает сделки;
+   — издаёт приказы и распоряжения;
+   — открывает банковские счета.
+
+═══════════════════════════════════════════════
+
+6. РАСПРЕДЕЛЕНИЕ ПРИБЫЛИ
+
+6.1. Прибыль Товарищества, оставшаяся после уплаты налогов, распределяется между участниками пропорционально их долям в уставном капитале по решению Общего собрания участников.
+
+═══════════════════════════════════════════════
+
+7. КОНФИДЕНЦИАЛЬНОСТЬ
+
+7.1. Участники и Директор обязуются сохранять в тайне сведения о деятельности Товарищества, составляющие коммерческую тайну.
+
+═══════════════════════════════════════════════
+
+8. ЛИКВИДАЦИЯ И РЕОРГАНИЗАЦИЯ
+
+8.1. Товарищество может быть реорганизовано или ликвидировано по решению Общего собрания участников либо по решению суда.
+
+8.2. Ликвидация осуществляется ликвидационной комиссией. После погашения всех обязательств оставшееся имущество распределяется между участниками пропорционально их долям.
+
+═══════════════════════════════════════════════
+
+9. ЗАКЛЮЧИТЕЛЬНЫЕ ПОЛОЖЕНИЯ
+
+9.1. Настоящий Устав вступает в силу с момента государственной регистрации Товарищества.
+
+9.2. Изменения в Устав вносятся по решению Общего собрания участников и подлежат государственной регистрации.
+
+═══════════════════════════════════════════════
+
+${data.founders.map((f,i)=>`Участник ${i+1}: ${f.name||'_______________'} / подпись: _____________`).join('\n')}`;
+}
+
+function genReshenie(){
+  const nm = data.companyRu || '[НАЗВАНИЕ ТОО]';
+  const city = data.city || 'Алматы';
+  const cap = parseInt(data.capital||0).toLocaleString('ru-RU');
+  const dir = data.director || '[ФИО ДИРЕКТОРА]';
+
+  if(data.founders.length === 1){
+    const f = data.founders[0];
+    return `РЕШЕНИЕ № 1
+единственного учредителя
+о создании Товарищества с ограниченной ответственностью
+«${nm}»
+
+г. ${city}                                  «${getDate()}»
+
+Я, ${f.name||'[ФИО]'}, ИИН ${f.iin||'____________'}, являясь единственным учредителем,
+
+РЕШИЛ:
+
+1. Создать Товарищество с ограниченной ответственностью «${nm}».
+
+2. Утвердить Устав ТОО «${nm}» в представленной редакции.
+
+3. Установить уставный капитал в размере ${cap} (${numToWords(data.capital)}) тенге.
+
+4. Назначить Директором ТОО «${nm}» гражданина(ку) ${dir}.
+   Директор действует без ограничения срока полномочий.
+
+5. Определить юридический адрес Товарищества: ${data.address||'[АДРЕС]'}.
+
+6. Поручить Директору осуществить государственную регистрацию Товарищества.
+
+
+Единственный учредитель:
+
+${f.name||'_______________'} / подпись: _______________ / дата: «${getDate()}»`;
+  } else {
+    // протокол для нескольких учредителей
+    return `ПРОТОКОЛ № 1
+общего собрания учредителей
+Товарищества с ограниченной ответственностью
+«${nm}»
+
+г. ${city}                                  «${getDate()}»
+
+Присутствовали учредители:
+${data.founders.map((f,i)=>`${i+1}. ${f.name||'[ФИО]'}, ИИН ${f.iin||'____________'}, доля ${f.share}%`).join('\n')}
+
+ПОВЕСТКА ДНЯ:
+1. Создание ТОО «${nm}».
+2. Утверждение Устава.
+3. Определение уставного капитала.
+4. Назначение директора.
+5. Определение юридического адреса.
+
+СЛУШАЛИ и ПОСТАНОВИЛИ:
+
+1. Создать Товарищество с ограниченной ответственностью «${nm}». Голосование: единогласно.
+
+2. Утвердить Устав ТОО «${nm}» в представленной редакции. Голосование: единогласно.
+
+3. Установить уставный капитал в размере ${cap} (${numToWords(data.capital)}) тенге со следующим распределением долей:
+${data.founders.map(f=>`   — ${f.name||'[ФИО]'}: ${f.share}%`).join('\n')}
+
+4. Назначить Директором ТОО «${nm}» гражданина(ку) ${dir}. Голосование: единогласно.
+
+5. Определить юридический адрес: ${data.address||'[АДРЕС]'}. Голосование: единогласно.
+
+ПОДПИСИ УЧРЕДИТЕЛЕЙ:
+
+${data.founders.map((f,i)=>`${f.name||'_______________'} / подпись: _______________ / дата: ________`).join('\n\n')}`;
+  }
+}
+
+function numToWords(n){
+  const num = parseInt(n||0);
+  if(num===0) return 'ноль';
+  // Simple helper for common amounts
+  if(num===100000) return 'сто тысяч';
+  if(num===500000) return 'пятьсот тысяч';
+  if(num===1000000) return 'один миллион';
+  return num.toLocaleString('ru-RU')+' тенге';
+}
+
+function stepDocs(){
+  const tabs = ['Устав ТОО','Решение / Протокол'];
+  const tabsHtml = tabs.map((t,i)=>`<div class="tab ${activeTab===i?'active':''}" onclick="switchTab(${i})">${t}</div>`).join('');
+
+  const doc = activeTab===0 ? genUstav() : genReshenie();
+  const docName = activeTab===0 ? 'Устав_ТОО' : (data.founders.length===1?'Решение_учредителя':'Протокол_учредителей');
+
+  return `
+  <div class="sh-tag">Шаг 3 — Документы</div>
+  <div class="sh-h1">Готовые документы для регистрации</div>
+  <div class="sh-sub">Сгенерированы на основе твоих данных. Скачай, проверь и при необходимости покажи юристу.</div>
+
+  <div class="info amber"><strong>Важно:</strong> Это шаблон для ознакомления. Перед подачей рекомендуется проверить у юриста или использовать форму на egov.kz (там устав формируется автоматически при онлайн-регистрации).</div>
+
+  <div class="card">
+    <div class="tabs">${tabsHtml}</div>
+    <div class="doc-out" id="docText">${escHtml(doc)}</div>
+    <div class="doc-actions">
+      <button class="btn btn-secondary btn-sm" onclick="copyDoc()">📋 Скопировать</button>
+      <button class="btn btn-secondary btn-sm" onclick="downloadDoc('${docName}')">⬇️ Скачать .txt</button>
+    </div>
+    <div id="copyMsg" class="hidden" style="color:var(--green);font-size:13px;margin-top:4px">✓ Скопировано в буфер обмена</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📁</span>Что подавать при регистрации</div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Устав ТОО</div><div class="cl-desc">При онлайн-регистрации через egov.kz устав генерируется автоматически — загружать отдельно не нужно</div></div></div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Решение учредителя / Протокол</div><div class="cl-desc">Подтверждает факт создания компании и назначения директора</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Документы, удостоверяющие личность учредителей</div><div class="cl-desc">Удостоверение личности или паспорт гражданина РК</div></div></div>
+    <div class="cl-item"><div class="cl-box"></div><div class="cl-content"><div class="cl-name">Документ на юридический адрес</div><div class="cl-desc">Договор аренды или письмо-согласие собственника помещения</div></div></div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="next()">Далее → Регистрация ТОО</button>
+  </div>`;
+}
+
+function switchTab(n){ activeTab=n; render(); }
+function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+function copyDoc(){
+  const text = activeTab===0?genUstav():genReshenie();
+  navigator.clipboard.writeText(text).then(()=>{
+    const msg=document.getElementById('copyMsg');
+    msg.classList.remove('hidden');
+    setTimeout(()=>msg.classList.add('hidden'),2500);
+  });
+}
+function downloadDoc(name){
+  const text = activeTab===0?genUstav():genReshenie();
+  const blob = new Blob([text],{type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name+'.txt';
+  a.click();
+}
+
+// ─────────────────────────────────────────
+function stepRegister(){
+  const isOnline = data.regMethod !== 'con';
+  const checks = [
+    {id:'r1', name:'Получить ЭЦП', desc:'Если ещё нет — оформи на сайте pki.gov.kz или в любом ЦОНе. Бесплатно, занимает ~1 час.', link:'https://pki.gov.kz', linkTxt:'pki.gov.kz', req:true},
+    {id:'r2', name:'Проверить уникальность названия', desc:'Зайди на egov.kz → "Проверка наименования юридического лица". Убедись, что твоё название свободно.', link:'https://egov.kz', linkTxt:'egov.kz', req:true},
+    ...(isOnline ? [
+      {id:'r3', name:'Зайти на egov.kz → Бизнес', desc:'Услуга: "Регистрация юридического лица". Войди через ЭЦП или SMS-ОТП.', link:'https://egov.kz/cms/ru/services/juridical_persons/registraciya_yuridicheskih_lic', linkTxt:'Прямая ссылка на услугу', req:true},
+      {id:'r4', name:'Заполнить форму регистрации', desc:'Вводишь название, вид деятельности, юрадрес, данные учредителей и директора. Устав генерируется автоматически.', req:true},
+      {id:'r5', name:'Подписать ЭЦП', desc:'Все документы подписываются электронной подписью прямо на портале. Нотариус не нужен.', req:true},
+      {id:'r6', name:'Получить свидетельство о регистрации', desc:'Придёт в личный кабинет egov.kz в течение 1 рабочего дня. БИН присваивается автоматически.', req:true},
+    ] : [
+      {id:'r3c', name:'Записаться в ЦОН', desc:'Найди ближайший ЦОН (НАО "Правительство для граждан"). Можно записаться онлайн.', link:'https://con.gov.kz', linkTxt:'con.gov.kz', req:true},
+      {id:'r4c', name:'Подготовить комплект документов', desc:'Устав (2 экземпляра), решение/протокол, удостоверения личности, документ на юрадрес, заявление.', req:true},
+      {id:'r5c', name:'Подать документы в ЦОН', desc:'Специалист примет документы и выдаст расписку. Срок: 3 рабочих дня.', req:true},
+      {id:'r6c', name:'Получить свидетельство о регистрации', desc:'Забрать свидетельство и устав с отметкой о регистрации. БИН указан в свидетельстве.', req:true},
+    ]),
+  ];
+
+  return `
+  <div class="sh-tag">Шаг 4 — Регистрация</div>
+  <div class="sh-h1">Регистрация ТОО</div>
+  <div class="sh-sub">Выбери удобный способ и отметь пункты по мере выполнения.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🔀</span>Способ регистрации</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;padding:10px 16px;border:2px solid ${isOnline?'var(--blue)':'var(--border)'};border-radius:8px;flex:1;min-width:180px">
+        <input type="radio" name="regMethod" value="online" ${isOnline?'checked':''} onchange="data.regMethod='online';save();render()">
+        <div><strong>Онлайн через egov.kz</strong><br><small>1 рабочий день, нужна ЭЦП</small></div>
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;padding:10px 16px;border:2px solid ${!isOnline?'var(--blue)':'var(--border)'};border-radius:8px;flex:1;min-width:180px">
+        <input type="radio" name="regMethod" value="con" ${!isOnline?'checked':''} onchange="data.regMethod='con';save();render()">
+        <div><strong>Через ЦОН</strong><br><small>3 рабочих дня, без ЭЦП</small></div>
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✅</span>Чеклист регистрации</div>
+    ${checks.map(c=>`
+    <div class="cl-item">
+      <div class="cl-box ${data.checks[c.id]?'checked':''}" data-check="${c.id}" onclick="toggleCheck('${c.id}')">${data.checks[c.id]?'✓':''}</div>
+      <div class="cl-content">
+        <div class="cl-name">${c.name}<span class="cl-badge badge-req">обязательно</span></div>
+        <div class="cl-desc">${c.desc}</div>
+        ${c.link?`<a class="cl-link" href="${c.link}" target="_blank">→ ${c.linkTxt}</a>`:''}
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📅</span>Примерный таймлайн</div>
+    <div style="padding-left:24px;border-left:2px solid var(--blue-mid)">
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День 1</div><div style="font-size:14px;font-weight:600">Подаёшь заявку</div><div style="font-size:13px;color:var(--muted)">Заполняешь форму на egov.kz, подписываешь ЭЦП</div></div>
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">${isOnline?'День 2':'День 4'}</div><div style="font-size:14px;font-weight:600">Получаешь свидетельство</div><div style="font-size:13px;color:var(--muted)">ТОО зарегистрировано, БИН присвоен</div></div>
+      <div style="margin-bottom:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">День ${isOnline?'3-5':'5-7'}</div><div style="font-size:14px;font-weight:600">Открываешь банковский счёт + налоговый учёт</div><div style="font-size:13px;color:var(--muted)">Следующий шаг</div></div>
+    </div>
+  </div>
+
+  <div class="info green"><strong>Стоимость регистрации — бесплатно.</strong> ЭЦП также выдаётся бесплатно. Возможны расходы на нотариуса (при регистрации через ЦОН с нотариальным заверением) — ~5 000–15 000 тенге.</div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="next()">Далее → После регистрации</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+function stepPostReg(){
+  const checks2 = [
+    {id:'p1', name:'Встать на налоговый учёт', desc:'Автоматически при регистрации ТОО. Тем не менее войди в Кабинет налогоплательщика и убедись, что компания там отображается.', link:'https://cabinet.salyk.kz', linkTxt:'cabinet.salyk.kz', req:true},
+    {id:'p2', name:'Выбрать налоговый режим', desc:'Для малого бизнеса: Упрощённая декларация (3% с выручки, до 24 000 МРП оборота). Для большинства IT-стартапов подходит. После получения статуса Astana Hub налоги обнуляются.', req:true},
+    {id:'p3', name:'Открыть корпоративный банковский счёт', desc:'Нужен счёт для юрлица. Рекомендуем: Kaspi, Halyk, Jusan, Freedom. Понадобится свидетельство о регистрации, устав, решение.', link:'https://kaspi.kz/business', linkTxt:'Kaspi Бизнес', req:true},
+    {id:'p4', name:'Получить статистические коды (ОКЭД)', desc:'Зарегистрируйся в Комитете по статистике — обычно происходит автоматически. Проверь наличие кодов в личном кабинете.', link:'https://stat.gov.kz', linkTxt:'stat.gov.kz', req:false},
+    {id:'p5', name:'Заказать печать (по желанию)', desc:'Печать для ТОО не обязательна с 2015 года, но может понадобиться для некоторых банков и партнёров.', req:false},
+    {id:'p6', name:'Зарегистрировать кассу (если нужна)', desc:'Если будешь принимать наличные от физлиц — нужна контрольно-кассовая машина (ФСД). Для B2B и безналичных расчётов — не нужна.', req:false},
+    {id:'p7', name:'Нанять первых сотрудников (если есть)', desc:'Заключи трудовые договоры, зарегистрируй в ЕНПФ (пенсионный фонд) и ГФСС (соцстрахование). Или работай как единственный участник-директор.', link:'https://www.enbek.kz', linkTxt:'enbek.kz', req:false},
+  ];
+
+  return `
+  <div class="sh-tag">Шаг 5 — После регистрации</div>
+  <div class="sh-h1">После получения свидетельства о регистрации</div>
+  <div class="sh-sub">ТОО зарегистрировано — теперь несколько обязательных и рекомендуемых шагов перед запуском работы.</div>
+
+  <div class="info green"><strong>🎉 Поздравляем!</strong> Ты получил БИН — Business Identification Number. Это основной идентификатор твоего юрлица. Храни свидетельство о регистрации — оно понадобится для банка и заявки в Hub.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span>Чеклист после регистрации</div>
+    ${checks2.map(c=>`
+    <div class="cl-item">
+      <div class="cl-box ${data.checks[c.id]?'checked':''}" data-check="${c.id}" onclick="toggleCheck('${c.id}')">${data.checks[c.id]?'✓':''}</div>
+      <div class="cl-content">
+        <div class="cl-name">${c.name}<span class="cl-badge ${c.req?'badge-req':'badge-opt'}">${c.req?'обязательно':'рекомендуется'}</span></div>
+        <div class="cl-desc">${c.desc}</div>
+        ${c.link?`<a class="cl-link" href="${c.link}" target="_blank">→ ${c.linkTxt}</a>`:''}
+      </div>
+    </div>`).join('')}
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💰</span>Сравнение налоговых режимов</div>
+    <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+      <tr style="background:var(--bg)"><th style="text-align:left;padding:8px 10px;border:1px solid var(--border)">Режим</th><th style="padding:8px 10px;border:1px solid var(--border)">Ставка</th><th style="padding:8px 10px;border:1px solid var(--border)">Лимит оборота</th><th style="padding:8px 10px;border:1px solid var(--border)">Подходит для</th></tr>
+      <tr><td style="padding:8px 10px;border:1px solid var(--border);font-weight:600">Упрощённая декларация</td><td style="padding:8px 10px;border:1px solid var(--border);text-align:center;color:var(--green);font-weight:700">3%</td><td style="padding:8px 10px;border:1px solid var(--border);text-align:center">до ~126 млн ₸/год</td><td style="padding:8px 10px;border:1px solid var(--border)">Малый бизнес, стартапы</td></tr>
+      <tr style="background:var(--bg)"><td style="padding:8px 10px;border:1px solid var(--border);font-weight:600">Общеустановленный</td><td style="padding:8px 10px;border:1px solid var(--border);text-align:center">КПН 20% + НДС 12%</td><td style="padding:8px 10px;border:1px solid var(--border);text-align:center">без лимита</td><td style="padding:8px 10px;border:1px solid var(--border)">Крупный бизнес</td></tr>
+      <tr><td style="padding:8px 10px;border:1px solid var(--border);font-weight:700;color:var(--blue)">Резидент Astana Hub</td><td style="padding:8px 10px;border:1px solid var(--border);text-align:center;color:var(--green);font-weight:700">0%</td><td style="padding:8px 10px;border:1px solid var(--border);text-align:center">без лимита</td><td style="padding:8px 10px;border:1px solid var(--border)">IT-компании</td></tr>
+    </table>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="next()">Далее → Astana Hub</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+function stepHubInfo(){
+  return `
+  <div class="sh-tag">Шаг 6 — Astana Hub</div>
+  <div class="sh-h1">Что такое Astana Hub и зачем туда идти</div>
+  <div class="sh-sub">Международный технологический парк «Astana Hub» — особая экономическая зона для IT-компаний в Казахстане.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💎</span>Привилегии резидентов</div>
+    <div class="benefit-row">
+      <div class="benefit"><div class="benefit-icon">💸</div><div class="benefit-val">0%</div><div class="benefit-name">Корпоративный подоходный налог</div><div class="benefit-desc">Вместо стандартных 20% КПН</div></div>
+      <div class="benefit"><div class="benefit-icon">🧾</div><div class="benefit-val">0%</div><div class="benefit-name">НДС на услуги</div><div class="benefit-desc">Вместо стандартных 12%</div></div>
+      <div class="benefit"><div class="benefit-icon">✈️</div><div class="benefit-val">Fast</div><div class="benefit-name">Визы для иностранцев</div><div class="benefit-desc">Упрощённое разрешение на работу для иностранных специалистов</div></div>
+      <div class="benefit"><div class="benefit-icon">🤝</div><div class="benefit-val">Network</div><div class="benefit-name">Сообщество и инвесторы</div><div class="benefit-desc">Доступ к экосистеме, менторам, акселераторам</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✅</span>Кто может стать резидентом</div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Зарегистрированное ТОО в Казахстане</div><div class="cl-desc">Юрлицо должно быть создано и зарегистрировано</div></div></div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">IT / инновационная деятельность</div><div class="cl-desc">Разработка ПО, IT-услуги, e-commerce, fintech, edtech, healthtech, AI, IoT и т.д.</div></div></div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Отсутствие налоговой задолженности</div><div class="cl-desc">Чистая налоговая история компании и учредителей</div></div></div>
+    <div class="cl-item"><div class="cl-box checked">✓</div><div class="cl-content"><div class="cl-name">Инновационный продукт или сервис</div><div class="cl-desc">Должен быть описан в заявке с бизнес-планом</div></div></div>
+    <div class="cl-item"><div class="cl-box" style="border-color:#fca5a5"></div><div class="cl-content"><div class="cl-name" style="color:var(--red)">Не принимаются</div><div class="cl-desc">Торговля, строительство, сырьевые компании, общепит и другие не-IT виды деятельности</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🗓️</span>Процесс получения статуса</div>
+    <div style="padding-left:20px;border-left:2px solid var(--blue-mid)">
+      <div style="margin-bottom:16px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Этап 1</div><div style="font-size:14px;font-weight:600">Подача заявки онлайн</div><div style="font-size:13px;color:var(--muted)">Через astanahub.com — форма + документы</div></div>
+      <div style="margin-bottom:16px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Этап 2 — до 10 дней</div><div style="font-size:14px;font-weight:600">Первичное рассмотрение</div><div class="cl-desc">Проверка документов и соответствия критериям</div></div>
+      <div style="margin-bottom:16px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Этап 3</div><div style="font-size:14px;font-weight:600">Интервью / питч</div><div style="font-size:13px;color:var(--muted)">Онлайн или очно — рассказываешь о компании и продукте</div></div>
+      <div style="margin-bottom:16px"><div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase">Этап 4 — до 30 дней</div><div style="font-size:14px;font-weight:600">Решение и подписание договора</div><div style="font-size:13px;color:var(--muted)">Получаешь статус резидента и подписываешь соглашение с Hub</div></div>
+    </div>
+  </div>
+
+  <div class="info blue"><strong>Лайфхак:</strong> Многие компании подают в Astana Hub сразу после регистрации ТОО — не нужно ждать первой выручки или большой команды. Главное — чёткое описание IT-продукта.</div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="next()">Далее → Заполнить заявку</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+function stepHubApp(){
+  function autoField(label, value, placeholder){
+    const isEmpty = !value;
+    return `<div class="hub-field">
+      <div class="hub-field-label">${label}</div>
+      <div class="hub-field-auto ${isEmpty?'empty':''}">${value || placeholder}</div>
+    </div>`;
+  }
+  function editField(label, key, placeholder, type='text'){
+    return `<div class="hub-field">
+      <div class="hub-field-label">${label}</div>
+      <input class="field-input" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit"
+        id="hf_${key}" value="${data[key]||''}" placeholder="${placeholder}" type="${type}"
+        oninput="data['${key}']=this.value;save()">
+    </div>`;
+  }
+
+  const foundersList = data.founders.map(f=>`${f.name||'[ФИО]'} (${f.share}%)`).join(', ');
+
+  return `
+  <div class="sh-tag">Шаг 7 — Заявка</div>
+  <div class="sh-h1">Заявка в Astana Hub</div>
+  <div class="sh-sub">Данные из твоей компании уже подставлены автоматически. Сине-подсвеченные поля заполнены — серые нужно дополнить.</div>
+
+  <div class="info blue">Официальная заявка подаётся на <strong>astanahub.com</strong>. Эта форма — черновик для подготовки. Скопируй данные отсюда при заполнении официального сайта.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🏢</span>Данные компании</div>
+    ${autoField('Полное наименование юридического лица', data.companyRu?`ТОО «${data.companyRu}»`:'', '← введи данные на шаге 2')}
+    ${autoField('Наименование на английском', data.companyEn, '← введи данные на шаге 2')}
+    ${autoField('Юридический адрес', data.address, '← введи данные на шаге 2')}
+    ${autoField('Основной вид деятельности (ОКЭД)', data.okved, '')}
+    ${autoField('Директор', data.director, '← введи данные на шаге 2')}
+    ${autoField('Учредители', foundersList, '← введи данные на шаге 2')}
+    <div class="hub-field">
+      <div class="hub-field-label">БИН (заполни после регистрации ТОО)</div>
+      <input style="width:100%;padding:9px 12px;border:1px dashed var(--border);border-radius:7px;font-size:14px;font-family:inherit" id="hf_bin" value="${data.bin||''}" placeholder="000000000000" maxlength="12" oninput="data.bin=this.value;save()">
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💡</span>Описание продукта и бизнеса</div>
+    ${autoField('Описание компании / продукта', data.bizDesc, '← введи данные на шаге 2')}
+    ${autoField('Продукт / сервис', data.product, '← введи данные на шаге 2')}
+    ${autoField('Целевой рынок', data.market, '← введи данные на шаге 2')}
+
+    <div class="hub-field">
+      <div class="hub-field-label">Стадия развития продукта</div>
+      <select style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit" id="hf_stage" oninput="data.stage=this.value;save()">
+        ${['Идея','MVP','Работающий продукт','Выручка / клиенты','Масштабирование'].map(s=>`<option ${data.stage===s?'selected':''}>${s}</option>`).join('')}
+      </select>
+    </div>
+
+    <div class="hub-field">
+      <div class="hub-field-label">Объём рынка (TAM) — оценочно</div>
+      <input style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit" id="hf_tam" value="${data.tam||''}" placeholder="$500M в Казахстане и СНГ" oninput="data.tam=this.value;save()">
+    </div>
+
+    <div class="hub-field">
+      <div class="hub-field-label">Текущая выручка / ARR (если есть)</div>
+      <input style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit" id="hf_revenue" value="${data.revenue||''}" placeholder="0 / $10K MRR / и т.д." oninput="data.revenue=this.value;save()">
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">👥</span>Команда и контакты</div>
+    ${autoField('Количество сотрудников', data.teamSize, '← введи данные на шаге 2')}
+
+    <div class="hub-field">
+      <div class="hub-field-label">Ключевые члены команды (ФИО, роль)</div>
+      <textarea style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit;resize:vertical;min-height:80px" placeholder="Иван Иванов — CEO, 10 лет опыта в FinTech&#10;Мария Петрова — CTO, ex-Kaspi" oninput="data.team=this.value;save()">${data.team||''}</textarea>
+    </div>
+
+    <div class="two-col">
+      <div class="hub-field">
+        <div class="hub-field-label">Email для связи</div>
+        <input style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit" value="${data.email||''}" placeholder="hello@company.kz" oninput="data.email=this.value;save()">
+      </div>
+      <div class="hub-field">
+        <div class="hub-field-label">Телефон</div>
+        <input style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;font-family:inherit" value="${data.phone||''}" placeholder="+7 700 000 0000" oninput="data.phone=this.value;save()">
+      </div>
+    </div>
+    ${autoField('Сайт', data.website, '← введи данные на шаге 2')}
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📎</span>Документы для загрузки в заявку</div>
+    <div class="cl-item"><div class="cl-box ${data.checks['h1']?'checked':''}" data-check="h1" onclick="toggleCheck('h1')">${data.checks['h1']?'✓':''}</div><div class="cl-content"><div class="cl-name">Свидетельство о государственной регистрации ТОО<span class="cl-badge badge-req">обязательно</span></div><div class="cl-desc">PDF-скан или электронный документ из egov.kz</div></div></div>
+    <div class="cl-item"><div class="cl-box ${data.checks['h2']?'checked':''}" data-check="h2" onclick="toggleCheck('h2')">${data.checks['h2']?'✓':''}</div><div class="cl-content"><div class="cl-name">Устав ТОО<span class="cl-badge badge-req">обязательно</span></div><div class="cl-desc">Заверенная копия или электронный документ</div></div></div>
+    <div class="cl-item"><div class="cl-box ${data.checks['h3']?'checked':''}" data-check="h3" onclick="toggleCheck('h3')">${data.checks['h3']?'✓':''}</div><div class="cl-content"><div class="cl-name">Бизнес-план<span class="cl-badge badge-req">обязательно</span></div><div class="cl-desc">2–10 страниц: проблема, решение, рынок, бизнес-модель, команда, финансовые прогнозы</div></div></div>
+    <div class="cl-item"><div class="cl-box ${data.checks['h4']?'checked':''}" data-check="h4" onclick="toggleCheck('h4')">${data.checks['h4']?'✓':''}</div><div class="cl-content"><div class="cl-name">Pitch Deck<span class="cl-badge badge-opt">рекомендуется</span></div><div class="cl-desc">10–15 слайдов о компании, продукте и рынке</div></div></div>
+    <div class="cl-item"><div class="cl-box ${data.checks['h5']?'checked':''}" data-check="h5" onclick="toggleCheck('h5')">${data.checks['h5']?'✓':''}</div><div class="cl-content"><div class="cl-name">Справка об отсутствии налоговой задолженности<span class="cl-badge badge-req">обязательно</span></div><div class="cl-desc">Получить на egov.kz → "Справка об отсутствии задолженности"</div><a class="cl-link" href="https://egov.kz" target="_blank">→ egov.kz</a></div></div>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+    <button class="btn btn-green" onclick="copyHubApp()">📋 Скопировать черновик заявки</button>
+    <a class="btn btn-secondary" href="https://astanahub.com" target="_blank">→ Открыть astanahub.com</a>
+  </div>
+  <div id="hubCopyMsg" class="hidden" style="color:var(--green);font-size:13px;margin-bottom:12px">✓ Данные скопированы в буфер обмена</div>
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-primary" onclick="next()">Далее → Финальный чеклист</button>
+  </div>`;
+}
+
+function copyHubApp(){
+  const text = `ЗАЯВКА В ASTANA HUB — черновик
+${new Date().toLocaleDateString('ru-RU')}
+
+═══════ ДАННЫЕ КОМПАНИИ ═══════
+Наименование: ТОО «${data.companyRu||'—'}»
+Наименование (англ.): ${data.companyEn||'—'}
+БИН: ${data.bin||'[получить после регистрации]'}
+Юридический адрес: ${data.address||'—'}
+ОКЭД: ${data.okved||'—'}
+Директор: ${data.director||'—'}
+Учредители: ${data.founders.map(f=>`${f.name} (${f.share}%)`).join(', ')}
+
+═══════ ПРОДУКТ ═══════
+Описание: ${data.bizDesc||'—'}
+Продукт/сервис: ${data.product||'—'}
+Целевой рынок: ${data.market||'—'}
+Стадия: ${data.stage||'—'}
+Объём рынка (TAM): ${data.tam||'—'}
+Выручка/ARR: ${data.revenue||'—'}
+
+═══════ КОМАНДА ═══════
+Количество: ${data.teamSize||'—'}
+Ключевые участники:
+${data.team||'—'}
+
+═══════ КОНТАКТЫ ═══════
+Email: ${data.email||'—'}
+Телефон: ${data.phone||'—'}
+Сайт: ${data.website||'—'}`;
+
+  navigator.clipboard.writeText(text).then(()=>{
+    const msg=document.getElementById('hubCopyMsg');
+    if(msg){msg.classList.remove('hidden');setTimeout(()=>msg.classList.add('hidden'),2500);}
+  });
+}
+
+// ─────────────────────────────────────────
+function stepFinal(){
+  const allChecks = [
+    {label:'Получена ЭЦП', id:'r1', section:'Регистрация ТОО'},
+    {label:'Проверено название компании', id:'r2', section:'Регистрация ТОО'},
+    {label:'Подана заявка на регистрацию', id:'r3', section:'Регистрация ТОО'},
+    {label:'Получено свидетельство о регистрации / БИН', id:'r6', section:'Регистрация ТОО'},
+    {label:'Открыт банковский счёт', id:'p3', section:'После регистрации'},
+    {label:'Налоговый учёт', id:'p1', section:'После регистрации'},
+    {label:'Выбран налоговый режим', id:'p2', section:'После регистрации'},
+    {label:'Свидетельство о регистрации готово для Hub', id:'h1', section:'Astana Hub'},
+    {label:'Устав готов для Hub', id:'h2', section:'Astana Hub'},
+    {label:'Бизнес-план написан', id:'h3', section:'Astana Hub'},
+    {label:'Справка об отсутствии задолженности', id:'h5', section:'Astana Hub'},
+    {label:'Заявка в Astana Hub подана', id:'hub_submitted', section:'Astana Hub'},
+  ];
+
+  const doneCount = allChecks.filter(c=>data.checks[c.id]).length;
+  const pct = Math.round((doneCount/allChecks.length)*100);
+
+  const bySection = {};
+  allChecks.forEach(c=>{
+    if(!bySection[c.section]) bySection[c.section]=[];
+    bySection[c.section].push(c);
+  });
+
+  let sectionsHtml = Object.entries(bySection).map(([sec,items])=>`
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 4px">${sec}</div>
+    ${items.map(c=>`<div class="final-row">
+      <div class="cl-box ${data.checks[c.id]?'checked':''}" data-check="${c.id}" onclick="toggleCheck('${c.id}')" style="flex-shrink:0">${data.checks[c.id]?'✓':''}</div>
+      <div style="flex:1">${c.label}</div>
+      <div class="f-status ${data.checks[c.id]?'f-done':'f-pending'}">${data.checks[c.id]?'✓ Сделано':'Ожидает'}</div>
+    </div>`).join('')}
+  `).join('');
+
+  return `
+  <div class="sh-tag">Шаг 8 — Финал</div>
+  <div class="sh-h1">Финальный чеклист</div>
+  <div class="sh-sub">Всё на одном экране. Отмечай по мере выполнения.</div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+      <div style="font-size:40px;font-weight:800;color:${pct===100?'var(--green)':'var(--blue)'}">${pct}%</div>
+      <div>
+        <div style="font-size:15px;font-weight:600">${doneCount} из ${allChecks.length} выполнено</div>
+        <div style="font-size:13px;color:var(--muted)">${pct===100?'🎉 Всё готово! Поздравляем!':pct>50?'Хороший прогресс, продолжай!':'Начни с получения ЭЦП и регистрации ТОО'}</div>
+      </div>
+    </div>
+    <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px">
+      <div style="height:100%;width:${pct}%;background:${pct===100?'var(--green)':'var(--blue)'};border-radius:4px;transition:width .3s"></div>
+    </div>
+    ${sectionsHtml}
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🔗</span>Полезные ссылки</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a class="btn btn-secondary btn-sm" href="https://egov.kz" target="_blank">egov.kz — регистрация</a>
+      <a class="btn btn-secondary btn-sm" href="https://pki.gov.kz" target="_blank">pki.gov.kz — ЭЦП</a>
+      <a class="btn btn-secondary btn-sm" href="https://cabinet.salyk.kz" target="_blank">Налоговый кабинет</a>
+      <a class="btn btn-secondary btn-sm" href="https://astanahub.com" target="_blank">astanahub.com</a>
+      <a class="btn btn-secondary btn-sm" href="https://stat.gov.kz" target="_blank">Статкомитет</a>
+    </div>
+  </div>
+
+  ${pct===100?`<div class="info green"><strong>🎉 Поздравляем!</strong> Ты прошёл весь путь. Удачи с бизнесом и резидентством в Astana Hub!</div>`:''}
+
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="prev()">← Назад</button>
+    <button class="btn btn-secondary" onclick="if(confirm('Сбросить все данные?')){localStorage.clear();location.reload()}">🗑 Начать заново</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────
+function render(){
+  renderSidebar();
+  renderProgress();
+  const el = document.getElementById('mainContent');
+  const step = STEPS[currentStep].id;
+  const map = {
+    intro: stepIntro,
+    data: stepData,
+    docs: stepDocs,
+    register: stepRegister,
+    postreg: stepPostReg,
+    hubinfo: stepHubInfo,
+    hubapp: stepHubApp,
+    final: stepFinal,
+  };
+  el.innerHTML = map[step]?.() || '';
+  if(step==='data') afterRenderData();
+}
+
+render();
+</script>
+</body>
+</html>
